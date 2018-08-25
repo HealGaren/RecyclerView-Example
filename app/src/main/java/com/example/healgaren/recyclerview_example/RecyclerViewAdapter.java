@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,12 +40,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         TodoVo todo = todoList.get(position);
 
         holder.textTitle.setText(todo.getTitle());
         holder.textContent.setText(todo.getContent());
 
+        holder.checkBox.setChecked(todo.isChecked());
         Log.d("YEC", position + "번째 아이템의 onBindViewHolder 실행");
     }
 
@@ -56,11 +59,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView textTitle;
         TextView textContent;
+        CheckBox checkBox;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTodoTitle);
             textContent = itemView.findViewById(R.id.textTodoContent);
+            checkBox = itemView.findViewById(R.id.checkTodo);
+
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    todoList.get(getAdapterPosition()).setChecked(isChecked);
+                }
+            });
+
             Log.d("YEC", "findViewById 실행");
         }
 
