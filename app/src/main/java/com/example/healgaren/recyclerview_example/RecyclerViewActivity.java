@@ -23,5 +23,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter.addAllTodo(TodoRepository.mockTodoList);
     }
 }

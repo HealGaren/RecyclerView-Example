@@ -5,8 +5,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+
+    List<TodoVo> todoList = new ArrayList<>();
+
+
+    public void addTodo(TodoVo todo) {
+        todoList.add(todo);
+    }
+
+    public void addAllTodo(List<TodoVo> todoList) {
+        this.todoList.addAll(todoList);
+    }
 
 
     @NonNull
@@ -21,18 +36,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        TodoVo todo = todoList.get(position);
 
+        holder.textTitle.setText(todo.getTitle());
+        holder.textContent.setText(todo.getContent());
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return todoList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView textTitle;
+        TextView textContent;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            textTitle = itemView.findViewById(R.id.textTodoTitle);
+            textContent = itemView.findViewById(R.id.textTodoContent);
         }
 
     }
