@@ -1,14 +1,20 @@
 package com.example.healgaren.recyclerview_example;
 
 public class TodoVo {
+    private String previewImgUrl;
     private String title;
     private String content;
     private boolean isChecked;
 
-    public TodoVo(String title, String content) {
+    public TodoVo(String title, String content, String previewImgUrl) {
         this.title = title;
         this.content = content;
+        this.previewImgUrl = previewImgUrl;
         isChecked = true;
+    }
+
+    public TodoVo(String title, String content) {
+        this(title, content, null);
     }
 
     public String getTitle() {
@@ -33,5 +39,13 @@ public class TodoVo {
 
     public void setChecked(boolean checked) {
         isChecked = checked;
+    }
+
+    public String getPreviewImgUrl() {
+        return previewImgUrl;
+    }
+
+    public void setPreviewImgUrl(String previewImgUrl) {
+        this.previewImgUrl = previewImgUrl;
     }
 }

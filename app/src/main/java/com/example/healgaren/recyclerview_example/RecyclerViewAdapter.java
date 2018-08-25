@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.textContent.setText(todo.getContent());
 
         holder.checkBox.setChecked(todo.isChecked());
+
+        Glide
+                .with(holder.itemView)
+                .load(todo.getPreviewImgUrl())
+                .into(holder.imgPreview);
+
         Log.d("YEC", position + "번째 아이템의 onBindViewHolder 실행");
     }
 
@@ -60,12 +69,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView textTitle;
         TextView textContent;
         CheckBox checkBox;
+        ImageView imgPreview;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTodoTitle);
             textContent = itemView.findViewById(R.id.textTodoContent);
             checkBox = itemView.findViewById(R.id.checkTodo);
+            imgPreview = itemView.findViewById(R.id.imgTodoPreview);
 
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
