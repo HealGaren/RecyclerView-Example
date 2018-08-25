@@ -1,5 +1,6 @@
 package com.example.healgaren.recyclerview_example;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,6 @@ public class ListViewAdapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_todo, parent, false);
 
-
         TextView textTitle = view.findViewById(R.id.textTodoTitle);
         TextView textContent = view.findViewById(R.id.textTodoContent);
 
@@ -50,6 +50,9 @@ public class ListViewAdapter extends BaseAdapter {
 
         textTitle.setText(todo.getTitle());
         textContent.setText(todo.getContent());
+
+
+        Log.d("YEC", position + "번 아이템의 getView가 실행되었습니다.");
 
         return view;
     }
